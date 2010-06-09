@@ -25,5 +25,8 @@ login:
 vote_history.html: login
 	wget --load-cookies $(COOKIES) "$(VOTE_HISTORY_URL)" -O $@
 
+movies.xml: vote_history.xhtml
+	$(RUN_XSLT) -o $@ $< movies.xsl
+
 clean:
 	rm -f vote_history.html vote_history.xhtml $(COOKIES)
