@@ -28,8 +28,8 @@ vote_history.html: login
 premovies.xml: vote_history.xhtml
 	$(RUN_XSLT) -o $@ $< movies.xsl
 
-movie_list.txt: premovies.xml
-	$(RUN_XSLT) -im:list-movie-ids $< movies.xsl	
+movie_list.txt: premovies.xml movie_list.xsl
+	$(RUN_XSLT) -o $@ $< movie_list.xsl
 
 clean:
-	rm -f vote_history.html vote_history.xhtml premovies.xml $(COOKIES)
+	rm -f vote_history.html vote_history.xhtml premovies.xml movie_list.txt $(COOKIES)
