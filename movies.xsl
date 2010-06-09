@@ -15,9 +15,13 @@
     
     <xsl:template match="//xhtml:table//xhtml:table//xhtml:table//xhtml:table//xhtml:tr[position() ge 4 and position() le last()-3]">
     	<movie>
+    		<xsl:variable name="link" select="xhtml:td[2]/xhtml:a/@href" />
+    		<id>
+				<xsl:value-of select="substring(tokenize($link, '/')[3], 3)" />
+			</id>
     		<link>
     			<xsl:text>http://www.imdb.com</xsl:text>
-		    	<xsl:value-of select="xhtml:td[2]/xhtml:a/@href" />    	
+		    	<xsl:value-of select="$link" />    	
     		</link>
     		<title>
 		    	<xsl:value-of select="normalize-space(xhtml:td[2]/xhtml:a)" />    	
