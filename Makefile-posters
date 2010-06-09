@@ -1,0 +1,22 @@
+# - Adam Koprowski 9/06/2010
+
+include Makefile-XSLT
+
+######################################################################################################
+
+MOVIE_PAGE := http://www.imdb.com/title/tt
+
+######################################################################################################
+
+MOVIES := $(shell cat movie_list.txt)
+MOVIES_XHTML := $(MOVIES:%=imdb/movie-%.xhtml)
+
+######################################################################################################
+
+all: $(MOVIES_XHTML)
+
+%.xhtml: %.html
+	html2xhtml -t strict $< -o $@ 
+
+imdb/movie-%.html: 
+	wget -O $@ $(MOVIE_PAGE)$*/

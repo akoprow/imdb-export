@@ -1,7 +1,7 @@
 # - Adam Koprowski 9/06/2010
 
 include imdb_passwd
-include Makefile.XSLT
+include Makefile-XSLT
 
 ######################################################################################################
 
@@ -12,7 +12,7 @@ COOKIES := cookies.txt
 
 ######################################################################################################
 
-.PHONY: login clean
+.PHONY: login clean posters
 
 all: movies.xml
 
@@ -30,6 +30,9 @@ premovies.xml: vote_history.xhtml
 
 movie_list.txt: premovies.xml movie_list.xsl
 	$(RUN_XSLT) -o $@ $< movie_list.xsl
+
+posters: movie_list.txt
+	make -f Makefile-posters 
 
 clean:
 	rm -f vote_history.html vote_history.xhtml premovies.xml movie_list.txt $(COOKIES)
