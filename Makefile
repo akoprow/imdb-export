@@ -1,6 +1,6 @@
 # - Adam Koprowski 9/06/2010
 
-include imdb_passwd
+include .imdb_passwd
 include Makefile-XSLT
 
 ######################################################################################################
