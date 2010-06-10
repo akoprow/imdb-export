@@ -26,13 +26,16 @@ vote_history.html: login
 	wget --load-cookies $(COOKIES) "$(VOTE_HISTORY_URL)" -O $@
 
 premovies.xml: vote_history.xhtml
-	$(RUN_XSLT) -o $@ $< movies.xsl
+	$(RUN_XSLT) -o $@ $< premovies.xsl
 
 movie_list.txt: premovies.xml movie_list.xsl
 	$(RUN_XSLT) -o $@ $< movie_list.xsl
 
+movies.xml: premovies.xml movies.xsl
+	$(RUN_XSLT) -o $@ $< movies.xsl
+	
 posters: movie_list.txt
 	make -f Makefile-posters 
 
 clean:
-	rm -f vote_history.html vote_history.xhtml premovies.xml movie_list.txt $(COOKIES)
+	rm -f vote_history.html vote_history.xhtml premovies.xml movies.xml movie_list.txt $(COOKIES)
