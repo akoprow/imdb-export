@@ -17,28 +17,39 @@ COOKIES := cookies.txt
 all: movies.xml poster-files
 
 login:
-	wget --save-cookies $(COOKIES) "$(LOGIN_URL)" --directory-prefix=/tmp
+	$(SHOW) Logging to IMDB...
+	$(HIDE) wget --save-cookies $(COOKIES) "$(LOGIN_URL)" --directory-prefix=/tmp -o /dev/null
 
 %.xhtml: %.html
-	html2xhtml -t strict $< -o $@ 
+	$(SHOW) Generating: [$@]
+	$(HIDE) html2xhtml -t strict $< -o $@ 
 
 vote_history.html: login
-	wget --load-cookies $(COOKIES) "$(VOTE_HISTORY_URL)" -O $@
+	$(SHOW) Generating: [$@]
+	$(HIDE) wget --load-cookies $(COOKIES) "$(VOTE_HISTORY_URL)" -O $@ -o /dev/null
 
 premovies.xml: vote_history.xhtml
-	$(RUN_XSLT) -o $@ $< premovies.xsl
+	$(SHOW) Generating: [$@]
+	$(HIDE) $(RUN_XSLT) -o $@ $< premovies.xsl
 
 movie_list.txt: premovies.xml movie_list.xsl
-	$(RUN_XSLT) -o $@ $< movie_list.xsl
+	$(SHOW) Generating: [$@]
+	$(HIDE) $(RUN_XSLT) -o $@ $< movie_list.xsl
 
 movies.xml: premovies.xml movies.xsl movie-files 
-	$(RUN_XSLT) -o $@ $< movies.xsl
-	
+	$(SHOW) Generating: [$@] 
+	$(HIDE) $(RUN_XSLT) -o $@ $< movies.xsl
+
 movie-files: movie_list.txt
-	make -f Makefile-posters get-movie-files 
+	$(HIDE) make -f Makefile-posters get-movie-files 
 
 poster-files: movies.xml
-	make -f Makefile-posters get-poster-files
+	$(HIDE) make -f Makefile-posters get-poster-files
 
 clean:
-	rm -f vote_history.html vote_history.xhtml premovies.xml movies.xml movie_list.txt $(COOKIES)
+	$(SHOW) Cleaning...
+	$(HIDE) rm -f vote_history.html vote_history.xhtml premovies.xml movies.xml movie_list.txt $(COOKIES)
+
+full-clean: clean
+	$(SHOW) Cleaning cached movies and poster files...
+	$(HIDE) rm -f imdb/*.xhtml posters/*.jpg

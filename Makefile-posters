@@ -18,10 +18,13 @@ get-movie-files: $(MOVIES_XHTML)
 get-poster-files: $(MOVIE_POSTERS)
 
 %.xhtml: %.html
-	html2xhtml -t strict $< -o $@ 
+	$(SHOW) Generating: [$@]
+	$(HIDE) html2xhtml -t strict $< -o $@ 
 
 imdb/movie-%.html: 
-	wget -O $@ $(MOVIE_PAGE)$*/
+	$(SHOW) Generating: [$@]
+	$(HIDE) wget -O $@ $(MOVIE_PAGE)$*/ -o /dev/null
 
 posters/%.jpg: movies.xml
-	wget -O $@ `$(RUN_XSLT) $< lookup_poster.xsl movie-id=$*`
+	$(SHOW) Generating: [$@]
+	$(HIDE) wget -O $@ `$(RUN_XSLT) $< lookup_poster.xsl movie-id=$*` -o /dev/null
