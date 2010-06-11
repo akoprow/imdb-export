@@ -18,7 +18,7 @@
 				<xsl:otherwise>
 					<xsl:value-of select="$poster-url" />
 				</xsl:otherwise>		
-			</xsl:choose>	
+			</xsl:choose>
 		</poster-url>
 	</xsl:template>
 

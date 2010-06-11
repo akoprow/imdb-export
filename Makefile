@@ -12,9 +12,9 @@ COOKIES := cookies.txt
 
 ######################################################################################################
 
-.PHONY: login clean posters
+.PHONY: login clean movie-files poster-files
 
-all: movies.xml
+all: movies.xml poster-files
 
 login:
 	wget --save-cookies $(COOKIES) "$(LOGIN_URL)" --directory-prefix=/tmp
@@ -31,11 +31,14 @@ premovies.xml: vote_history.xhtml
 movie_list.txt: premovies.xml movie_list.xsl
 	$(RUN_XSLT) -o $@ $< movie_list.xsl
 
-movies.xml: premovies.xml movies.xsl
+movies.xml: premovies.xml movies.xsl movie-files 
 	$(RUN_XSLT) -o $@ $< movies.xsl
 	
-posters: movie_list.txt
-	make -f Makefile-posters 
+movie-files: movie_list.txt
+	make -f Makefile-posters get-movie-files 
+
+poster-files: movies.xml
+	make -f Makefile-posters get-poster-files
 
 clean:
 	rm -f vote_history.html vote_history.xhtml premovies.xml movies.xml movie_list.txt $(COOKIES)

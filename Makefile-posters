@@ -10,13 +10,18 @@ MOVIE_PAGE := http://www.imdb.com/title/tt
 
 MOVIES := $(shell cat movie_list.txt)
 MOVIES_XHTML := $(MOVIES:%=imdb/movie-%.xhtml)
+MOVIE_POSTERS := $(MOVIES:%=posters/%.jpg)
 
 ######################################################################################################
 
-all: $(MOVIES_XHTML)
+get-movie-files: $(MOVIES_XHTML)
+get-poster-files: $(MOVIE_POSTERS)
 
 %.xhtml: %.html
 	html2xhtml -t strict $< -o $@ 
 
 imdb/movie-%.html: 
 	wget -O $@ $(MOVIE_PAGE)$*/
+
+posters/%.jpg: movies.xml
+	wget -O $@ `$(RUN_XSLT) $< lookup_poster.xsl movie-id=$*`
