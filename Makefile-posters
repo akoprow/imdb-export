@@ -25,6 +25,6 @@ imdb/movie-%.html:
 	$(SHOW) Generating: [$@]
 	$(HIDE) wget -O $@ $(MOVIE_PAGE)$*/ -o /dev/null
 
-posters/%.jpg: movies.xml
+posters/%.jpg:
 	$(SHOW) Generating: [$@]
 	$(HIDE) wget -O $@ `$(RUN_XSLT) $< lookup_poster.xsl movie-id=$*` -o /dev/null
