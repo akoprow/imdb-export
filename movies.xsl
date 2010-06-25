@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
 	<xsl:output method="xml" indent="yes"  />
     
 	<xsl:template match="id">
 		<xsl:copy-of select="." />
+		<xsl:variable name="movie" select="document(concat('imdb/movie-', ., '.xhtml'))" />
 		<poster-url>
-			<xsl:variable name="poster-url" select="document(concat('imdb/movie-', ., '.xhtml'))//xhtml:a[@id='poster']/xhtml:img/@src" />
+			<xsl:variable name="poster-url" select="$movie//xhtml:a[@id='poster']/xhtml:img/@src" />
 			<xsl:choose>
 				<xsl:when test="string-length($poster-url) = 0">
 					<xsl:message>
@@ -20,6 +21,9 @@
 				</xsl:otherwise>		
 			</xsl:choose>
 		</poster-url>
+		<imdb-votes>
+			<xsl:value-of select="$movie//xhtml:div[@class='starbar-meta']/xhtml:a" />
+		</imdb-votes>
 	</xsl:template>
 
 	<xsl:template match="*">
