@@ -7,7 +7,7 @@
 		<xsl:copy-of select="." />
 		<xsl:variable name="movie" select="document(concat('imdb/movie-', ., '.xhtml'))" />
 		<poster-url>
-			<xsl:variable name="poster-url" select="$movie//xhtml:a[@id='poster']/xhtml:img/@src" />
+			<xsl:variable name="poster-url" select="$movie//xhtml:td[@id='img_primary']/xhtml:a/xhtml:img/@src" />
 			<xsl:choose>
 				<xsl:when test="string-length($poster-url) = 0">
 					<xsl:message>
