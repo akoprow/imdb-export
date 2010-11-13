@@ -24,6 +24,9 @@
 		<imdb-votes>
 			<xsl:value-of select="$movie//xhtml:div[@class='starbar-meta']/xhtml:a" />
 		</imdb-votes>
+                <length>
+                        <xsl:value-of select="normalize-space($movie//*[normalize-space(.) = 'Runtime:']/parent::node()/text()[2])" />
+                </length>
 	</xsl:template>
 
 	<xsl:template match="*">
