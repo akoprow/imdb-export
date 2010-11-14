@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE tvseries[
+	<!ELEMENT tvseries (finished, inprogress)>
+	<!ELEMENT finished (tvserie*)>
+	<!ELEMENT inprogress (tvserie*)>
+	<!ELEMENT tvserie (name, rating, imdb-id, year, length, poster, seasons)>
+	<!ELEMENT seasons (season*)>
+	<!ATTLIST season len CDATA #REQUIRED>
+]>
+
+<tvseries>
+	<finished>
+		<tvserie>
+			<name>Six Feet Under</name>
+			<rating>10</rating>
+			<imdb-id>0248654</imdb-id>
+			<year>2001-2005</year>
+			<length>55</length>
+			<seasons>
+				<season len="13"><finished /></season>
+				<season len="13"><finished /></season>
+				<season len="13"><finished /></season>
+				<season len="12"><finished /></season>
+				<season len="12"><finished /></season>
+			</seasons>
+		</tvserie>
+	</finished>
+	<inprogress>
+		<tvserie>
+			<name>Southpark</name>
+			<rating>9</rating>
+			<imdb-id>0121955</imdb-id>
+			<year>1997-</year>
+			<length>22</length>
+			<seasons>
+				<season len="13"><finished /></season>
+				<season len="18"><finished /></season>
+				<season len="17"><finished /></season>
+				<season len="17"><finished /></season>
+				<season len="14"><finished /></season>
+				<season len="17"><finished /></season>
+				<season len="15"><finished /></season>
+				<season len="14"><finished /></season>
+				<season len="14"><finished /></season>
+				<season len="14"><finished /></season>
+				<season len="14"><finished /></season>
+				<season len="14"><finished /></season>
+				<season len="14"><finished /></season>
+				<season len="13">+++++++++++++</season>
+				<!-- 17/11 -->
+			</seasons>
+		</tvserie>	
+		<tvserie>
+			<name>Dexter</name>
+			<rating>8</rating>
+			<imdb-id>0773262</imdb-id>
+			<year>2006-</year>
+			<length>55</length>
+			<seasons>
+				<season len="12"><finished /></season>
+				<season len="12"><finished /></season>
+				<season len="12"><finished /></season>
+				<season len="12"><finished /></season>
+				<season len="8">+++++++</season>
+				<!-- 21/11 28/11 5/12 12/12 -->
+			</seasons>
+		</tvserie>
+		<tvserie>
+			<name>Brothers and Sisters</name>
+			<rating>7</rating>
+			<imdb-id>0758737</imdb-id>
+			<year>2006-</year>
+			<length>42</length>
+			<seasons>
+				<season len="23"><finished/></season>
+				<season len="16"><finished/></season>
+				<season len="24"><finished/></season>
+				<season len="24"><finished/></season>
+				<season len="8">++++</season>
+				<!-- 5/12 12/12 2/1 -->
+			</seasons>
+		</tvserie>
+		<tvserie>
+			<name>Prison Break</name>
+			<rating>8</rating>
+			<imdb-id>0455275</imdb-id>
+			<year>2005-2009</year>
+			<length>43</length>
+			<seasons>
+				<season len="22">++++++++++++</season>
+				<season len="22" />
+				<season len="13" />
+				<season len="24" />
+			</seasons>
+		</tvserie>
+		<tvserie>
+			<name>Damages</name>
+			<rating>7</rating>
+			<imdb-id>0914387</imdb-id>
+			<year>2007-</year>
+			<length>43</length>
+			<seasons>
+				<season len="13">++++++++++++</season>
+				<season len="13" />
+				<season len="13" />
+				<!--  -->
+			</seasons>
+		</tvserie>		
+	</inprogress>	
+</tvseries>

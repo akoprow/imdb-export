@@ -5,7 +5,20 @@
 	<xsl:param name="movie-id" />
     
 	<xsl:template match="/">
-		<xsl:value-of select="//movie[id=$movie-id]/poster-url" />
+		<xsl:choose>
+			<xsl:when test="//movie[id=$movie-id]">
+				<xsl:value-of select="//movie[id=$movie-id]/poster-url" />			
+			</xsl:when>
+			<xsl:when test="//tvserie[id=$movie-id]">
+				<xsl:value-of select="//tvserie[id=$movie-id]/poster-url" />			
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:message terminate="yes">
+					<xsl:text>Cannot find poster URL for movie with id: </xsl:text>
+					<xsl:value-of select="$movie-id" />
+				</xsl:message>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
     
 </xsl:stylesheet>

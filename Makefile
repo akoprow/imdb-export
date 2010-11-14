@@ -32,7 +32,7 @@ premovies.xml: vote_history.xhtml
 	$(SHOW) Generating: [$@]
 	$(HIDE) $(RUN_XSLT) -o $@ $< premovies.xsl
 
-movie_list.txt: premovies.xml movie_list.xsl
+movie_list.txt: premovies.xml movie_list.xsl tvseries.xml
 	$(SHOW) Generating: [$@]
 	$(HIDE) $(RUN_XSLT) -o $@ $< movie_list.xsl
 
